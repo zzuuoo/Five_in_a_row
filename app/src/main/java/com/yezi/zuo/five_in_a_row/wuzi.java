@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,8 +35,8 @@ public class wuzi extends View{
     private float ratioPieceOfLineHeight = 3*1.0f/4;
 
     public static boolean Iswhite=true;//白棋先手
-    public static  List<Point> whiteArray = new ArrayList<>();
-    public static List<Point> blackArray = new ArrayList<>();
+    public static ArrayList<Point> whiteArray = new ArrayList<>();
+    public static ArrayList<Point> blackArray = new ArrayList<>();
 
     private boolean IsGameOver;
     private boolean IsWhiteWin;//true 白赢，否则黑赢
@@ -361,5 +363,58 @@ public class wuzi extends View{
             canvas.drawLine(y,statrx,y,endx,mpaint);
         }
     }
+
+    private static final String CUN = "instance";
+    private static final String CUN_GAMEOVER = "instance";
+
+    private static final String CUN_WHITEARRAY = "instance_white";
+
+    private static final String CUN_BLACKARRAY = "instance_black";
+    @Override
+    protected Parcelable onSaveInstanceState(){
+        Bundle bundle =new Bundle();
+        bundle.putParcelable(CUN,super.onSaveInstanceState());
+        bundle.putBoolean(CUN_GAMEOVER,IsGameOver);
+        bundle.putParcelableArrayList(CUN_BLACKARRAY,blackArray);
+        bundle.putParcelableArrayList(CUN_WHITEARRAY,whiteArray);
+        return bundle;
+    }
+    public void reStart(){
+        whiteArray.clear();
+        blackArray.clear();
+        IsWhiteWin=false;
+        Iswhite=true;
+        invalidate();
+        over=true;
+    }
+
+    public void quit_step(){
+        if(Iswhite&&!blackArray.isEmpty()){
+            blackArray.remove(blackArray.size()-1);
+            Iswhite=false;
+            invalidate();
+        }else if(!whiteArray.isEmpty()){
+            whiteArray.remove(whiteArray.size()-1);
+            Iswhite=true;
+            invalidate();
+        }else{
+            Toast.makeText(getContext(),"没有棋子可退",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state){
+        if(state instanceof Bundle){
+            Bundle bundle = (Bundle)state;
+            IsGameOver =bundle.getBoolean(CUN_GAMEOVER);
+            whiteArray = bundle.getParcelableArrayList(CUN_WHITEARRAY);
+            blackArray=bundle.getParcelableArrayList(CUN_BLACKARRAY);
+            super.onRestoreInstanceState(bundle.getParcelable(CUN));
+            return;
+        }
+        super.onRestoreInstanceState(state );
+    }
+
+
 
 }

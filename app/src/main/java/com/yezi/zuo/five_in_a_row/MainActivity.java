@@ -11,7 +11,9 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements View.OnClickListener{
     private Button replace;
     private Button quit;
+    private Button step;
     public static TextView tv;
+    private wuzi wu;
 
 
     @Override
@@ -27,8 +29,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
         replace =(Button)findViewById(R.id.replace);
         quit =(Button)findViewById(R.id.quit);
         tv =(TextView)findViewById(R.id.textView);
+        step = (Button)findViewById(R.id.step);
+        step.setOnClickListener(this);
         quit.setOnClickListener(this);
         replace.setOnClickListener(this);
+        wu = (wuzi)findViewById(R.id.view);
     }
 
     @Override
@@ -38,12 +43,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.replace:
-                wuzi.blackArray.clear();
-                wuzi.whiteArray.clear();
-                wuzi.over=true;
-                wuzi.Iswhite=true;
-                tv.setText("点击棋盘即更新布局并重新开始");
+                wu.reStart();
+//                tv.setText("点击棋盘即更新布局并重新开始");
 //                Toast.makeText(this,"点击棋盘即更新布局",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.step:
+                wu.quit_step();
                 break;
             default:
                 break;

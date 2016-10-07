@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgg"
+    android:background="@drawable/bbg"
     tools:context="com.yezi.zuo.five_in_a_row.MainActivity">
 
     <com.yezi.zuo.five_in_a_row.wuzi
@@ -19,25 +19,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="退出"
-        android:background="#fa081c"
+        android:background="#73fec6"
         android:id="@+id/quit"
+        android:textSize="20dp"
         android:layout_below="@+id/view"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="52dp"
-        android:layout_marginEnd="52dp" />
+        android:layout_toRightOf="@+id/step"
+        android:layout_toEndOf="@+id/step" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="重置"
-        android:background="#4cf404"
+        android:background="#73fec6"
         android:id="@+id/replace"
-        android:layout_marginLeft="53dp"
-        android:layout_marginStart="53dp"
-        android:layout_below="@+id/view"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="20dp"
+        android:layout_alignTop="@+id/step"
+        android:layout_toLeftOf="@+id/step"
+        android:layout_toStartOf="@+id/step" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,18 +43,31 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="白棋先手，君子无悔棋"
         android:id="@+id/myWord"
+        android:layout_marginTop="53dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
+        android:textSize="30dp"
+        android:textColor="#f60834"
         android:id="@+id/textView"
         android:layout_below="@+id/quit"
         android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="悔棋"
+        android:textSize="20dp"
+        android:id="@+id/step"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:background="#f5d6d6" />
 
 
 </RelativeLayout>
